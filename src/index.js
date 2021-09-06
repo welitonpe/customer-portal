@@ -1,17 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import AppStyle from './App.scss';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const customElementName = 'my-custom-element';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+class WebComponent extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({mode: 'open'});
+    }
+
+    connectedCallback() {
+        ReactDOM.render(
+            <>
+                <style type="text/css">{AppStyle}</style>
+
+                <React.StrictMode>
+                    <App />
+                </React.StrictMode>
+            </>,
+            this.shadowRoot
+        );
+    }
+}
+
+if (!customElements.get(customElementName)) {
+    customElements.define(customElementName, WebComponent);
+}
+
