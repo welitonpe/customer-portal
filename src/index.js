@@ -1,32 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import AppStyle from './App.scss';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import AppContextProvider from "./providers/AppContextProvider";
+import "./styles/global.scss";
 
-const customElementName = 'my-custom-element';
+import App from "./pages/App";
 
-class WebComponent extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({mode: 'open'});
-    }
-
-    connectedCallback() {
-        ReactDOM.render(
-            <>
-                <style type="text/css">{AppStyle}</style>
-
-                <React.StrictMode>
-                    <App />
-                </React.StrictMode>
-            </>,
-            this.shadowRoot
-        );
-    }
-}
-
-if (!customElements.get(customElementName)) {
-    customElements.define(customElementName, WebComponent);
-}
-
+ReactDOM.render(
+  <AppContextProvider>
+    <App />
+  </AppContextProvider>,
+  document.getElementById("root")
+);
