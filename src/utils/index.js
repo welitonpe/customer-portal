@@ -4,3 +4,12 @@ export const initialInvite = (id) => {
         roleId: id
     };
 };
+
+export const initialDxpAdmin = () => {
+    return {
+        email: "",
+        firstName: "",
+        lastName: "",
+        github: ""
+    };
+};
