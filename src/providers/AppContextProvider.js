@@ -1,12 +1,13 @@
 import { createContext, useReducer } from "react";
-import { initialInvite } from "../utils";
+import { initialDxpAdmin, initialInvite } from "../utils";
 import { rolesId, steps } from "../utils/constants";
 
 const AppContext = createContext();
 
 export const AppActions = {
   CHANGE_STEP: "CHANGE_STEP",
-  UPDATE_INVITES: "UPDATE_INVITES"
+  UPDATE_INVITES: "UPDATE_INVITES",
+  UPDATE_ADMINS: "UPDATE_ADMINS"
 };
 
 export const changeStep = (payload) => {
@@ -27,15 +28,10 @@ const initialState = {
     ],
     setUpDxp: {
       projectId: "",
-      dataCenterRegion: "",
-      dxpCloudEmailAddress: "",
-      adminsFirstName: "",
-      adminsLastName: "",
-      adminsGithubUsername: [
-        {
-          username: "",
-        },
-      ],
+      dataCenterRegion: 0,
+      admins: [
+        initialDxpAdmin()
+      ]
     },
   },
   dxp: {
@@ -58,6 +54,18 @@ const reducer = (state = initialState, action) => {
         form: {
           ...state.form,
           invites: action.payload
+        },
+      };
+    }
+    case AppActions.UPDATE_ADMINS: {
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          setUpDxp: {
+            ...state.form.setUpDxp,
+            admins: action.payload
+          }
         },
       };
     }
