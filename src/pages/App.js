@@ -1,5 +1,7 @@
 import { useContext } from "react";
+import Invites from "../components/onboard/invites";
 import Roles from "../components/onboard/roles";
+import SetupDXP from "../components/onboard/setup.dxp";
 import Welcome from "../components/onboard/welcome";
 import { AppContext } from "../providers/AppContextProvider";
 
@@ -14,6 +16,12 @@ function App() {
     }
     case steps.roles: {
       return <Roles />
+    }
+    case steps.invites: {
+      return <Invites />
+    }
+    case steps.dxp: {
+      return <SetupDXP />
     }
     default: {
       return <Welcome />;
