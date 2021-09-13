@@ -12,7 +12,7 @@ const HorizontalInputs = ({ id, invite }) => {
         <ClayInput.Group>
             <ClayInput.GroupItem>
                 <label htmlFor={`inviteEmail-${id}`}>Email</label>
-                <ClayInput className="bg-white rounded-lg border border-1" placeholder="username@superbank.com" type="text" id={`inviteEmail-${id}`} value={invite.email} />
+                <ClayInput className="bg-white rounded-lg border border-1" placeholder="username@superbank.com" type="email" id={`inviteEmail-${id}`} value={invite.email} />
             </ClayInput.GroupItem>
             <ClayInput.GroupItem>
                 <label htmlFor={`inviteRole-${id}`}>Role</label>
@@ -47,7 +47,7 @@ const Invites = () => {
         <Layout
             footerProps={{
                 leftButton: <BaseButton text={"Skip for now"} onClick={() => console.log('Skipped')} />,
-                middleButton: <PrimaryButton text={"Send Invitations"} onClick={() => dispatch(changeStep(steps.roles))} />
+                middleButton: <PrimaryButton text={"Send Invitations"} onClick={() => dispatch(changeStep(steps.dxp))} />
             }}
             headerProps={{
                 title: "Invite Your Team Members",
