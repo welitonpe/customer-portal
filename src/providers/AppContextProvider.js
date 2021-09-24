@@ -6,8 +6,9 @@ const AppContext = createContext();
 
 export const AppActions = {
   CHANGE_STEP: "CHANGE_STEP",
+  UPDATE_ROLE: "UPDATE_ROLE",
   UPDATE_INVITES: "UPDATE_INVITES",
-  UPDATE_ADMINS: "UPDATE_ADMINS"
+  UPDATE_ADMINS: "UPDATE_ADMINS",
 };
 
 export const changeStep = (payload) => {
@@ -24,14 +25,12 @@ const initialState = {
     invites: [
       initialInvite(rolesId.creator),
       initialInvite(rolesId.watcher),
-      initialInvite(rolesId.watcher)
+      initialInvite(rolesId.watcher),
     ],
     setUpDxp: {
       projectId: "",
       dataCenterRegion: 0,
-      admins: [
-        initialDxpAdmin()
-      ]
+      admins: [initialDxpAdmin()],
     },
   },
   dxp: {
@@ -48,12 +47,21 @@ const reducer = (state = initialState, action) => {
         step: action.payload,
       };
     }
+    case AppActions.UPDATE_ROLE: {
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          roleId: action.payload,
+        },
+      };
+    }
     case AppActions.UPDATE_INVITES: {
       return {
         ...state,
         form: {
           ...state.form,
-          invites: action.payload
+          invites: action.payload,
         },
       };
     }
@@ -64,8 +72,8 @@ const reducer = (state = initialState, action) => {
           ...state.form,
           setUpDxp: {
             ...state.form.setUpDxp,
-            admins: action.payload
-          }
+            admins: action.payload,
+          },
         },
       };
     }
