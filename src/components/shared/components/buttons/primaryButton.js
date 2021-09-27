@@ -1,6 +1,6 @@
 import { Button } from "@clayui/core";
 
-const PrimaryButton = ({ onClick, text, disabled = false }) => {
+const PrimaryButton = ({ onClick, text, disabled = true }) => {
   return (
     <Button
       className="rounded-lg"
