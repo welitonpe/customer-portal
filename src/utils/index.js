@@ -1,15 +1,15 @@
 export const initialInvite = (id) => {
-    return {
-        email: undefined,
-        roleId: id
-    };
+  return {
+    email: undefined,
+    roleId: id,
+  };
 };
 
 export const initialDxpAdmin = () => {
-    return {
-        email: "",
-        firstName: "",
-        lastName: "",
-        github: ""
-    };
+  return {
+    email: "",
+    firstName: "",
+    lastName: "",
+    github: "",
+  };
 };

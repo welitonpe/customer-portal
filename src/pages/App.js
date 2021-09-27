@@ -12,16 +12,16 @@ function App() {
 
   switch (step) {
     case steps.welcome: {
-      return <Welcome />
+      return <Welcome />;
     }
     case steps.roles: {
-      return <Roles />
+      return <Roles />;
     }
     case steps.invites: {
-      return <Invites />
+      return <Invites />;
     }
     case steps.dxp: {
-      return <SetupDXP />
+      return <SetupDXP />;
     }
     default: {
       return <Welcome />;

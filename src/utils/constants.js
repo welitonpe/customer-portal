@@ -1,3 +1,7 @@
+import Administrator from "../assets/administratorIcon.svg";
+import TicketCreatorIcon from "../assets/tiketCreatorIcon.svg";
+import TicketWatcherIcon from "../assets/ticketWatcherIcon.svg";
+
 const steps = {
   welcome: 0,
   roles: 1,
@@ -8,24 +12,24 @@ const steps = {
 const rolesId = {
   admin: 1,
   creator: 2,
-  watcher: 3
-}
+  watcher: 3,
+};
 
 const roles = [
   {
-    id: 1,
+    id: rolesId.admin,
     name: "Administrator",
-    icon: "TDB",
+    icon: Administrator,
   },
   {
-    id: 2,
+    id: rolesId.creator,
     name: "Ticket Creator",
-    icon: "TDB",
+    icon: TicketCreatorIcon,
   },
   {
-    id: 3,
+    id: rolesId.watcher,
     name: "Ticket Watcher",
-    icon: "TDB",
+    icon: TicketWatcherIcon,
   },
 ];
 
