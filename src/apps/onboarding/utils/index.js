@@ -6,10 +6,10 @@ export const initialInvite = (id) => {
 };
 
 export const initialDxpAdmin = () => {
-    return {
-        email: "",
-        firstName: "",
-        lastName: "",
-        github: ""
-    };
+  return {
+    email: "",
+    firstName: "",
+    lastName: "",
+    github: "",
+  };
 };
