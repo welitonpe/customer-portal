@@ -72,6 +72,7 @@ const Roles = () => {
                 payload: steps.invites,
               });
             }}
+            disabled={false}
           />
         ),
       }}

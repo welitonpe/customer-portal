@@ -1,6 +1,6 @@
 export const initialInvite = (id) => {
     return {
-        email: undefined,
+        email: "",
         roleId: id
     };
 };

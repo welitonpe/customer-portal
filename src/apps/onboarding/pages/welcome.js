@@ -12,7 +12,13 @@ const Welcome = () => {
   return (
     <Layout
       footerProps={{
-        middleButton: <PrimaryButton text={"Get Started"} onClick={() => dispatch(changeStep(steps.invites))} />
+        middleButton: (
+          <PrimaryButton
+            text={"Get Started"}
+            onClick={() => dispatch(changeStep(steps.roles))}
+            disabled={false}
+          />
+        ),
       }}
       headerProps={{
         intro: "Hello Sarah,",
@@ -22,12 +28,12 @@ const Welcome = () => {
     >
       <div className="align-items-center d-flex flex-column justify-content-center px-4">
         <img
-          height={300}
-          width={392}
           alt="Costumer Service Intro"
-          draggable={false}
-          src={Intro}
           className="mt-5 mb-4"
+          draggable={false}
+          height={300}
+          src={Intro}
+          width={392}
         />
 
         <p className="text-dark text-center px-2 mx-5">
