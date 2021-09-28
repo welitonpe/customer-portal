@@ -1,11 +1,10 @@
 import Header from "./header";
 import Footer from "./footer";
-import { Button } from "@clayui/core";
 
 const Layout = ({ children, headerProps, footerProps }) => (
-  <div className="border border-light card-content col-4 mt-5 mx-auto p-4 rounded shadow">
+  <div className="border border-light card-content col-4 d-flex flex-column mt-5 mx-auto rounded shadow p-0">
     <Header {...headerProps} />
-    <main>{children}</main>
+    <main className="flex-grow-1">{children}</main>
     <Footer {...footerProps} />
   </div>
 );
