@@ -78,7 +78,7 @@ const Roles = () => {
       }}
       headerProps={{
         intro: "Hello Sarah,",
-        title: "What’s your role on this projetc?",
+        title: "What’s your role on this project?",
         subtitle: "",
       }}
     >
