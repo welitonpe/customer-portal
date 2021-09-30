@@ -1,7 +1,4 @@
-const RadioButtons = ({ items, onClick, checked }) => {
-  const chek = () => {
-    return checked;
-  };
+const RadioButtons = ({ items, onClick }) => {
   return (
     <div className=" d-flex flex-column justify-content-start ">
       {items.map((item, index) => {
