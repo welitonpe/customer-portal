@@ -29,6 +29,15 @@ const reducer = (state, action) => {
                 },
             };
         }
+        case ActionTypes.UPDATE_ROLE: {
+            return {
+                ...state,
+                form: {
+                    ...state.form,
+                    roleId: action.payload,
+                },
+            };
+        }
         default: {
             return state;
         }
