@@ -3,9 +3,9 @@ import Layout from "../shared/layout";
 import { AppContext } from "../../providers/AppContextProvider";
 import PrimaryButton from "../shared/components/buttons/primaryButton";
 import { steps } from "../../utils/constants";
-import { AppActions } from "../../providers/AppContextProvider";
 import RadioButtons from "../shared/components/radio/radioButtons";
 import { roles, rolesId } from "../../utils/constants";
+import { ActionTypes } from "~/apps/onboarding/context/actions";
 
 const Roles = () => {
   const [, dispatch] = useContext(AppContext);
@@ -68,7 +68,7 @@ const Roles = () => {
             text={"Next"}
             onClick={() => {
               dispatch({
-                type: AppActions.CHANGE_STEP,
+                type: ActionTypes.CHANGE_STEP,
                 payload: steps.invites,
               });
             }}
@@ -88,7 +88,7 @@ const Roles = () => {
             items={roles}
             onClick={(item) => {
               dispatch({
-                type: AppActions.UPDATE_ROLE,
+                type: ActionTypes.UPDATE_ROLE,
                 roleId: item.id,
               });
               setRole(item.id);
