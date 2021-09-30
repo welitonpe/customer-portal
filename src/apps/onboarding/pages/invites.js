@@ -7,8 +7,8 @@ import { initialInvite } from "../utils";
 import { BaseButton, PrimaryButton } from "../../../shared/components/buttons";
 import Layout from "./layout";
 import { useFormik } from "formik";
-import { WarningBadge } from "../shared/components/buttons/badges/warningBadge";
-import { isEmail, maxLength, validate } from "../../utils/form.validate";
+import { isEmail, maxLength, validate } from "~/shared/utils/form.validate";
+import { WarningBadge } from "./components/buttons/badges/warningBadge";
 
 const HorizontalInputs = ({ error, id, invite, onChange }) => {
   return (
@@ -50,7 +50,7 @@ const HorizontalInputs = ({ error, id, invite, onChange }) => {
 };
 
 const Invites = () => {
-  const [dispatch] = useContext(AppContext);
+  const [, dispatch] = useContext(AppContext);
   const [isClicked, setIsClicked] = useState(false);
 
   const getInitialErrors = () => {};

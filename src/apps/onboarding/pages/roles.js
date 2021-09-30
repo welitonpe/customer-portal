@@ -1,11 +1,10 @@
 import { useState, useContext } from "react";
-import Layout from "../shared/layout";
-import { AppContext } from "../../providers/AppContextProvider";
-import PrimaryButton from "../shared/components/buttons/primaryButton";
-import { steps } from "../../utils/constants";
-import RadioButtons from "../shared/components/radio/radioButtons";
-import { roles, rolesId } from "../../utils/constants";
 import { ActionTypes } from "~/apps/onboarding/context/actions";
+import { AppContext } from "../context";
+import { roles, rolesId, steps } from "../utils/constants";
+import { PrimaryButton } from "~/shared/components/buttons";
+import RadioButtons from "./components/radio/radioButtons";
+import Layout from "./layout";
 
 const Roles = () => {
   const [, dispatch] = useContext(AppContext);

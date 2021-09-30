@@ -6,13 +6,8 @@ import { initialDxpAdmin } from '../utils';
 import { roles } from '../utils/constants';
 import Layout from './layout';
 import { useFormik } from "formik";
-import { WarningBadge } from "../shared/components/buttons/badges/warningBadge";
-import {
-  isEmail,
-  validate,
-  maxLength,
-  required,
-} from "../../utils/form.validate";
+import { isEmail, maxLength, required, validate } from '~/shared/utils/form.validate';
+import { WarningBadge } from './components/buttons/badges/warningBadge';
 
 const HorizontalInputs = ({ id, admin }) => {
     return (
