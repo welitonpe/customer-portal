@@ -1,14 +1,18 @@
-import { ActionTypes } from "./actions";
+import { actionTypes } from "./actions";
 
 const reducer = (state, action) => {
+    if (!action) {
+        return state;
+    }
+
     switch (action.type) {
-        case ActionTypes.CHANGE_STEP: {
+        case actionTypes.CHANGE_STEP: {
             return {
                 ...state,
                 step: action.payload,
             };
         }
-        case ActionTypes.UPDATE_INVITES: {
+        case actionTypes.UPDATE_INVITES: {
             return {
                 ...state,
                 form: {
@@ -17,7 +21,7 @@ const reducer = (state, action) => {
                 },
             };
         }
-        case ActionTypes.UPDATE_ADMINS: {
+        case actionTypes.UPDATE_ADMINS: {
             return {
                 ...state,
                 form: {
@@ -29,12 +33,12 @@ const reducer = (state, action) => {
                 },
             };
         }
-        case ActionTypes.UPDATE_ROLE: {
+        case actionTypes.UPDATE_ROLE: {
             return {
                 ...state,
                 form: {
                     ...state.form,
-                    roleId: action.payload,
+                    role: action.payload,
                 },
             };
         }
