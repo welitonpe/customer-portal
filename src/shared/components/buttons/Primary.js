@@ -1,6 +1,6 @@
 import { Button } from "@clayui/core";
 
-const PrimaryButton = ({ onClick, text, disabled = true }) => {
+const PrimaryButton = ({ children, onClick, disabled }) => {
   return (
     <Button
       className="rounded-lg"
@@ -8,7 +8,7 @@ const PrimaryButton = ({ onClick, text, disabled = true }) => {
       displayType="primary"
       onClick={onClick}
     >
-      {text}
+      {children}
     </Button>
   );
 };

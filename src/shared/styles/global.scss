@@ -2,4 +2,15 @@
 
 @import 'variables';
 @import '../components/buttons/buttons';
+@import './components/radios/radios';
 @import '../components/buttons/_badge';
+
+* {
+    font-family: "Source Sans Pro";
+    margin: 0;
+    padding: 0;
+}
+
+.rounded {
+    border-radius: 0.5rem !important;
+}

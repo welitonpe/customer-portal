@@ -1,0 +1,32 @@
+.square-radio {
+    height: 3.625rem;
+    width: 15.125rem;
+    padding: 0.813rem 0.644rem;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &.border-light {
+        border-color: rgba(43, 58, 75, 0.2) !important;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 0.25rem;
+        background: #0b5fff;
+        height: inherit;
+        transition: all 0.3s;
+        border-top-left-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;
+        opacity: 0;
+    }
+
+    &.selected::before {
+        opacity: 1;
+    }
+
+    &:not(:last-child) {
+        margin-bottom: 1.5rem;
+    }
+}
