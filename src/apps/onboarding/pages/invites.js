@@ -1,49 +1,34 @@
-import { useContext, useState } from "react";
-import ClayForm, { ClayInput, ClaySelect } from '@clayui/form';
-import { roles, rolesId, steps } from "../utils/constants";
+import { useContext } from "react";
+import ClayForm, { ClayInput } from '@clayui/form';
+import { getInitialInvite, getRolesList, steps } from "../utils/constants";
 import { AppContext } from "../context";
 import { changeStep } from "../context/actions";
-import { initialInvite } from "../utils";
 import { BaseButton, PrimaryButton } from "../../../shared/components/buttons";
 import Layout from "./layout";
-import { useFormik } from "formik";
-import { isEmail, maxLength, validate } from "~/shared/utils/form.validate";
-import { WarningBadge } from "./components/buttons/badges/warningBadge";
+import { useFormikContext } from "formik";
+import Input from "~/shared/components/Input";
+import Select from "~/shared/components/Select";
+import { isDirtyField, isValidField } from "~/shared/utils/validations.form";
 
-const HorizontalInputs = ({ error, id, invite, onChange }) => {
+const HorizontalInputs = ({ id }) => {
   return (
     <ClayInput.Group>
       <ClayInput.GroupItem>
-        <label htmlFor={`inviteEmail-${id}`}>Email </label>
-        <ClayInput
+        <Input
           className="bg-white rounded-lg border border-1"
-          id={`inviteEmail-${id}`}
           name={`invites[${id}].email`}
-          onChange={onChange}
-          placeholder="username@superbank.com"
+          placeholder="username@email.com"
           type="email"
-          value={invite.email}
+          label="Email"
         />
-        {error?.email && <WarningBadge>{error?.email}</WarningBadge>}
       </ClayInput.GroupItem>
       <ClayInput.GroupItem>
-        <label htmlFor={`inviteRole-${id}`}>Role</label>
-        <ClaySelect
-          aria-label="Select Role"
+        <Select
           className="bg-white rounded-lg border border-1"
-          defaultValue={invite.roleId}
-          id={`inviteRole-${id}`}
           name={`invites[${id}].roleId`}
-          onChange={onChange}
-        >
-          {roles.map((item) => (
-            <ClaySelect.Option
-              key={item.id}
-              label={item.name}
-              value={item.id}
-            />
-          ))}
-        </ClaySelect>
+          label="Role"
+          options={getRolesList()}
+        />
       </ClayInput.GroupItem>
     </ClayInput.Group>
   );
@@ -51,67 +36,24 @@ const HorizontalInputs = ({ error, id, invite, onChange }) => {
 
 const Invites = () => {
   const [, dispatch] = useContext(AppContext);
-  const [isClicked, setIsClicked] = useState(false);
-
-  const getInitialErrors = () => {};
-
-  const onValidate = (values) => {
-    let errorList = {};
-
-    const invitesErrors = values?.invites.map((invite) =>
-      validate(
-        {
-          email: [(v) => maxLength(v, 100), isEmail],
-        },
-        invite
-      )
-    );
-
-    const invitesError = invitesErrors.some((invite) => invite?.email);
-
-    if (invitesError) {
-      errorList.invites = invitesErrors;
-    }
-
-    return errorList;
-  };
-
-  const { errors, handleChange, setFieldValue, values } = useFormik({
-    initialErrors: getInitialErrors(),
-    validate: onValidate,
-    initialValues: {
-      invites: [
-        initialInvite(rolesId.admin),
-        initialInvite(rolesId.creator),
-        initialInvite(rolesId.watcher),
-      ],
-    },
-  });
-
-  const addInitialInvite = () => {
-    setIsClicked(true);
-
-    setFieldValue("invites", [
-      ...values.invites,
-      { email: "", roleId: rolesId.watcher },
-    ]);
-  };
+  const { values, setFieldValue, errors, getFieldMeta } = useFormikContext();
 
   return (
     <Layout
       footerProps={{
         leftButton: (
           <BaseButton
-            onClick={() => console.log("Skipped")}
-            text={"Skip for now"}
-          />
+          >
+            Skip for now
+          </BaseButton>
         ),
         middleButton: (
           <PrimaryButton
             onClick={() => dispatch(changeStep(steps.dxp))}
-            text={"Send Invitations"}
-            disabled={false}
-          />
+            disabled={!(isValidField("invites", errors) && isDirtyField(getFieldMeta("invites")))}
+          >
+            Send Invitations
+          </PrimaryButton>
         ),
       }}
       headerProps={{
@@ -123,25 +65,20 @@ const Invites = () => {
       <div className="invites-form px-4 pb-3">
         <ClayForm.Group className="m-0">
           {values.invites.map((invite, index) => (
-            <HorizontalInputs
-              error={invite.email !== "" && errors.invites?.[index]}
-              id={index}
-              invite={invite}
-              key={index}
-              onChange={handleChange}
-            />
+            <HorizontalInputs id={index} key={index} />
           ))}
         </ClayForm.Group>
         <BaseButton
           disabled={values.invites.length > 5}
-          onClick={() => addInitialInvite()}
+          onClick={() => setFieldValue("invites", [...values.invites, getInitialInvite()])}
           preffixIcon="plus"
           styles="text-primary py-2 mt-3"
-          text="Add More Members"
-        />
+        >
+          Add More Members
+        </BaseButton>
       </div>
-      <div className={`px-4 ${isClicked ? "bottom-content" : ""}`}>
-        <hr className={`mt-0 ${isClicked ? "invisible" : ""}`} />
+      <div className="px-4">
+        <hr className="mt-0" />
         <div className="text-content">
           Only 3 members per project (including yourself) have role permissions
           (Admins & Requestors) to open Support tickets.

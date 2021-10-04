@@ -1,129 +1,37 @@
-import ClayForm, { ClayInput, ClaySelect } from '@clayui/form';
-import { useContext, useState } from "react";
+import ClayForm, { ClayInput } from '@clayui/form';
+import { useFormikContext } from 'formik';
+import { useContext } from "react";
+import Input from '~/shared/components/Input';
+import Select from '~/shared/components/Select';
+import { isDirtyField, isValidField } from '~/shared/utils/validations.form';
 import { BaseButton, PrimaryButton } from '../../../shared/components/buttons';
-import { AppContext } from '../context';
-import { initialDxpAdmin } from '../utils';
-import { roles } from '../utils/constants';
+import { AppContext } from '../context'
+import { getInitialDxpAdmin, getRolesList } from '../utils/constants';
 import Layout from './layout';
-import { useFormik } from "formik";
-import { isEmail, maxLength, required, validate } from '~/shared/utils/form.validate';
-import { WarningBadge } from './components/buttons/badges/warningBadge';
 
-const HorizontalInputs = ({ id, admin }) => {
-    return (
-        <>
-            <hr />
-            <div className="dxp-form">
-                <label htmlFor="adminEmail">System Admin’s Email Address</label>
-                <ClayInput className="bg-white rounded-lg border border-1" placeholder="username@superbank.com" type="email" id="adminEmail" />
-            </div>
-            <ClayInput.Group>
-                <ClayInput.GroupItem>
-                    <label htmlFor="adminFirstName">System Admin’s First Name</label>
-                    <ClayInput className="bg-white rounded-lg border border-1" type="text" id="adminFirstName" />
-                </ClayInput.GroupItem>
-                <ClayInput.GroupItem>
-                    <label htmlFor="adminLastName">System Admin’s Last Name</label>
-                    <ClayInput className="bg-white rounded-lg border border-1" type="text" id="adminLastName" />
-                </ClayInput.GroupItem>
-            </ClayInput.Group>
-            <label htmlFor="adminGithub">System Admin’s Github Username</label>
-            <ClayInput className="bg-white rounded-lg border border-1" type="text" id="adminGithub" />
-        </>
-    );
+const AdminInputs = ({ id }) => {
+  return (
+    <>
+      <hr />
+      <div className="dxp-form">
+        <Input label="System Admin’s Email Address" name={`admins[${id}].email`} className="bg-white rounded-lg border border-1" placeholder="username@superbank.com" type="email" />
+      </div>
+      <ClayInput.Group>
+        <ClayInput.GroupItem>
+          <Input label="System Admin’s First Name" name={`admins[${id}].firstName`} className="bg-white rounded-lg border border-1" type="text" />
+        </ClayInput.GroupItem>
+        <ClayInput.GroupItem>
+          <Input label="System Admin’s Last Name" name={`admins[${id}].lastName`} className="bg-white rounded-lg border border-1" type="text" />
+        </ClayInput.GroupItem>
+      </ClayInput.Group>
+      <Input label="System Admin’s Github Username" name={`admins[${id}].github`} className="bg-white rounded-lg border border-1" type="text" />
+    </>
+  );
 }
 
 const SetupDXP = () => {
   const [state] = useContext(AppContext);
-  const [setIsClicked] = useState(false);
-
-  const getInitialErrors = () => {};
-
-  const onValidate = (values) => {
-    let errorList = {};
-
-    errorList = {
-      ...validate(
-        {
-          projectId: [(v) => maxLength(v, 100), required],
-        },
-        values?.setUpDxp
-      ),
-    };
-
-    const adminsErrors = values?.setUpDxp?.admins.map((admins) =>
-      validate(
-        {
-          email: [(v) => maxLength(v, 100), required, isEmail],
-          firstName: [(v) => maxLength(v, 100), required],
-          github: [(v) => maxLength(v, 100), required, isEmail],
-          lastName: [(v) => maxLength(v, 100), required],
-        },
-        admins
-      )
-    );
-
-    const withAdminsError = adminsErrors.some(
-      (admins) =>
-        admins?.email || admins?.firstName || admins?.github || admins?.lastName
-    );
-
-    if (withAdminsError) {
-      errorList.admins = adminsErrors;
-    }
-
-    return errorList;
-  };
-
-  const addInitialInvite = () => {
-    setIsClicked(true);
-
-    setFieldValue("setUpDxp.admins", [
-      ...values.setUpDxp.admins,
-      initialDxpAdmin(),
-    ]);
-  };
-
-  const {
-    dirty,
-    errors,
-    handleChange: _handleChange,
-    setFieldValue,
-    setTouched,
-    touched,
-    values,
-  } = useFormik({
-    initialErrors: getInitialErrors(),
-    validate: onValidate,
-    validateOnBlur: true,
-    validateOnMount: true,
-    initialValues: {
-      setUpDxp: {
-        projectId: "",
-        dataCenterRegion: 0,
-        admins: [initialDxpAdmin()],
-      },
-    },
-  });
-
-  function errosIsEmpty(error) {
-    for (var prop in error) {
-      if (Object.prototype.hasOwnProperty.call(error, prop)) {
-        return false;
-      }
-    }
-    return JSON.stringify(error) === JSON.stringify({});
-  }
-
-  const handleChange = (event) => {
-    const newTouched = { ...touched };
-
-    newTouched[event.target.id] = true;
-
-    setTouched(newTouched);
-
-    _handleChange(event);
-  };
+  const { values, setFieldValue, errors, getFieldMeta } = useFormikContext();
 
   return (
     <Layout
@@ -131,15 +39,17 @@ const SetupDXP = () => {
         leftButton: (
           <BaseButton
             onClick={() => console.log("Skipped")}
-            text={"Skip for now"}
-          />
+          >
+            Skip for now
+          </BaseButton>
         ),
         middleButton: (
           <PrimaryButton
-            onClick={() => console.log("Lambda, Labda!")}
-            text={"Submit"}
-            disabled={!errosIsEmpty(errors)}
-          />
+            onClick={() => console.log("Send it!")}
+            disabled={!(isValidField("admins", errors) && isDirtyField(getFieldMeta("admins")) && isValidField("dxp", errors) && isDirtyField(getFieldMeta("dxp")))}
+          >
+            Submit
+          </PrimaryButton>
         ),
       }}
       headerProps={{
@@ -160,68 +70,30 @@ const SetupDXP = () => {
           </div>
         </div>
         <div className="content-dxp-group">
-          <ClayForm.Group className="m-0 ">
+          <ClayForm.Group className="m-0">
             <div className="dxp-form">
-              <label htmlFor="projectId">Project ID</label>
-              <ClayInput
-                className="bg-white rounded-lg border border-1"
-                id="projectId"
-                name="setUpDxp.projectId"
-                onChange={handleChange}
-                placeholder="superbank1"
-                type="text"
-              />
-
-              {touched?.projectId && errors?.projectId ? (
-                <WarningBadge>{errors?.projectId}</WarningBadge>
-              ) : (
-                <div className="text-content ml-3 mt-1">
-                  Lowercase letters and numbers only. Project IDs cannot be
-                  changed.
-                </div>
-              )}
+              <Input label="Project ID" helper="Lowercase letters and numbers only. Project IDs cannot be change" name="dxp.projectId" className="bg-white rounded-lg border border-1" placeholder="superbank1" type="text" />
             </div>
             <div className="dxp-form">
-              <label htmlFor="dataCenterRegion">
-                Primary Data Center Region
-              </label>
-              <ClaySelect
-                aria-label="Select Region"
+              <Select
                 className="bg-white rounded-lg border border-1"
-                id="dataCenterRegion"
-                name="setUpDxp.dataCenterRegion"
-                onChange={handleChange}
-              >
-                {roles.map((item) => (
-                  <ClaySelect.Option
-                    key={item.id}
-                    label={item.name}
-                    value={item.id}
-                  />
-                ))}
-              </ClaySelect>
-              {errors?.dataCenterRegion && (
-                <WarningBadge>{errors?.dataCenterRegion}</WarningBadge>
-              )}
-            </div>
-            {values.setUpDxp.admins.map((admin, index) => (
-              <HorizontalInputs
-                admin={admin}
-                errors={dirty ? errors.admins?.[index] : null}
-                id={index}
-                key={index}
-                onChange={handleChange}
-                touched={{ touched }}
+                name="dxp.dataCenterRegion"
+                label="Primary Data Center Region"
+                options={getRolesList()}
               />
+            </div>
+            {values.admins.map((admin, index) => (
+              <AdminInputs id={index} key={index} />
             ))}
           </ClayForm.Group>
         </div>
         <BaseButton
-          onClick={() => addInitialInvite()}
+          onClick={() => setFieldValue("admins", [...values.admins, getInitialDxpAdmin()])}
           preffixIcon="plus"
           styles="text-primary py-2 my-3"
-          text="Add Another Admin"
-        />
+        >
+          Add Another Admin
+        </BaseButton>
       </div>
     </Layout>
   );

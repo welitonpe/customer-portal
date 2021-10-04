@@ -14,22 +14,21 @@ const Welcome = () => {
       footerProps={{
         middleButton: (
           <PrimaryButton
-            text={"Get Started"}
             onClick={() => dispatch(changeStep(steps.roles))}
-            disabled={false}
-          />
+          >
+            Get Started
+          </PrimaryButton>
         ),
       }}
       headerProps={{
         intro: "Hello Sarah,",
         title: "Welcome to Liferay’s Customer Portal",
-        subtitle: "",
       }}
     >
       <div className="align-items-center d-flex flex-column justify-content-center px-4">
         <img
           alt="Costumer Service Intro"
-          className="mt-5 mb-4"
+          className="mt-4 mb-4"
           draggable={false}
           height={300}
           src={Intro}
