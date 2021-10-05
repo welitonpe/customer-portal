@@ -28,7 +28,7 @@ const Welcome = () => {
       <div className="align-items-center d-flex flex-column justify-content-center px-4">
         <img
           alt="Costumer Service Intro"
-          className="mt-4 mb-4 pb-1"
+          className="mb-4 pb-1"
           draggable={false}
           height={300}
           src={Intro}

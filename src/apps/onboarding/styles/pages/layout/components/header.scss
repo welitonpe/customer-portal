@@ -3,7 +3,7 @@
 header {
   .greetings {
     font-size: $greetings-size;
-    line-height: 20px;
+    line-height: 20px !important;
     letter-spacing: 0.05em;
   }
   

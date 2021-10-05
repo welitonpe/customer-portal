@@ -1,10 +1,10 @@
-const SquareRadioGroup = ({ items, name, onChange, checked }) => {
+const SquareRadioGroup = ({ items, name, onChange, checked, className }) => {
     const isSelected = (item, checkedItem) => {
         return checkedItem && item.id === checkedItem.id;
     };
 
     return (
-        <div className="d-flex flex-column">
+        <div className={`d-flex flex-column ${className}`}>
             {items.map((item, index) => <label key={index} className={`d-flex align-items-center position-relative square-radio border ${isSelected(item, checked) ? "border-primary selected shadow-sm" : "border-light"} rounded`}>
                 <input
                     defaultChecked={isSelected(item, checked)}

@@ -5,16 +5,16 @@ import { PrimaryButton } from "~/shared/components/buttons";
 import Layout from "./layout";
 import { changeStep } from "../context/actions";
 import SquareRadioGroup from "~/shared/components/radios/SquareRadioGroup";
-import { useFormikContext } from "formik";import { isValidField } from "~/shared/utils/validations.form";
+import { useFormikContext } from "formik"; import { isValidField } from "~/shared/utils/validations.form";
 ;
 
 const Tip = ({ description, responsibles }) => {
   return (
-    <div className="d-flex flex-column  w-100 align-items-stretch flex-shrink-2 align-self-start">
-      <p className="text-dark mb-5 ">
+    <div className="mb-2">
+      <p className="text-dark mb-5">
         {description}
       </p>
-      <p className="fw-bolder font-weight-bold">You’re responsible for:</p>
+      <p className="font-weight-bold">You’re responsible for:</p>
       <ul>
         {responsibles.map((responsible, index) => <li key={index}>{responsible}</li>)}
       </ul>
@@ -23,8 +23,8 @@ const Tip = ({ description, responsibles }) => {
 }
 
 const Roles = () => {
-  const [, dispatch] = useContext(AppContext); 
-  const { values, setFieldValue, errors } = useFormikContext(); 
+  const [, dispatch] = useContext(AppContext);
+  const { values, setFieldValue, errors } = useFormikContext();
 
   return (
     <Layout
@@ -43,15 +43,14 @@ const Roles = () => {
         title: "What’s your role on this project?",
       }}
     >
-      <div className="align-items-center d-flex flex-row justify-content-between mt-8 mb-7 px-4">
-        <div className="flex-shrink-0 mr-5">
-          <SquareRadioGroup
-            items={getRolesList()}
-            name="role"
-            onChange={(role) => setFieldValue("role", role)}
-            checked={values.role}
-          />
-        </div>
+      <div className="align-items-center d-flex align-items-center px-4">
+        <SquareRadioGroup
+          items={getRolesList()}
+          name="role"
+          onChange={(role) => setFieldValue("role", role)}
+          checked={values.role}
+          className="pr-1 mr-5 radio-roles"
+        />
         <Tip {...values.role} />
       </div>
     </Layout>
