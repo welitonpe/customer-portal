@@ -7,8 +7,8 @@ import reducer from "./reducer";
 const initialApp = {
   step: steps.welcome,
   dxp: {
-    organization: "",
-    version: ""
+    organization: "SuperBank",
+    version: "7.3"
   },
 };
 
