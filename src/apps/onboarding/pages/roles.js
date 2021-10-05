@@ -11,10 +11,10 @@ import { useFormikContext } from "formik"; import { isValidField } from "~/share
 const Tip = ({ description, responsibles }) => {
   return (
     <div className="mb-2">
-      <p className="text-dark mb-5">
+      <p className="mb-5">
         {description}
       </p>
-      <p className="font-weight-bold">You’re responsible for:</p>
+      <p className="font-weight-bold mb-2">You’re responsible for:</p>
       <ul>
         {responsibles.map((responsible, index) => <li key={index}>{responsible}</li>)}
       </ul>

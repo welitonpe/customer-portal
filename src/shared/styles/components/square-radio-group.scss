@@ -1,9 +1,15 @@
+@import "../variables";
+
 .square-radio {
     height: 3.625rem;
     padding: 0.813rem 0.644rem;
     margin-bottom: 0;
     transition: all 0.3s;
     cursor: pointer;
+    font-weight: 900;
+    line-height: 21px;
+    font-size: $radio-group-label-size;
+    color: $black;
 
     &.border-light {
         border-color: rgba(43, 58, 75, 0.2) !important;
