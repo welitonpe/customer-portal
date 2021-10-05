@@ -1,41 +1,12 @@
-@import './components/footer';
-@import './components/header';
-
-.input-group-item {
-  margin-left: 2rem;
-  position: relative;
-}
-
-.input-group:not(:last-child) { 
-  margin-bottom: 2rem;  
-}
-
-.form-control {
-  height: 3rem;
-  padding: 0.75rem 1rem;
-  font-weight: bold;
-}
-
-.form-control::placeholder {
-  font-weight: bold;
-  color: #A7A3B2;
-}
-
-label {
-  font-size: 1rem;
-  font-weight: bold;
-}
+@import 'components/footer';
+@import 'components/header';
 
 .card-content {
   width: 600px;
   height: 678px;
-}
 
-main {
-  height: 470px;
-  overflow-y: auto;
-}
-
-.text-content {
-  font-size: 0.816rem;
+  main {
+    height: 470px;
+    overflow-y: auto;
+  }
 }
