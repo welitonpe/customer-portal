@@ -58,7 +58,7 @@ const Invites = () => {
       }}
       headerProps={{
         title: "Invite Your Team Members",
-        subtitle:
+        helper:
           "Team members will receive an email invitation to access this project on Customer Portal.",
       }}
     >

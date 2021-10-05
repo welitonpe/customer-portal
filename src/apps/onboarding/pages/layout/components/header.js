@@ -1,9 +1,9 @@
-const Header = ({ intro, title, subtitle }) => {
+const Header = ({ greetings, title, helper }) => {
   return (
     <header className="d-flex flex-column p-4">
-      {intro && <h5 className="text-primary font-weight-bold mb-1">{intro}</h5>}
-      <h1 className="m-0">{title}</h1>
-      {subtitle && <h6 className="font-weight-normal m-0">{subtitle}</h6>}
+      {greetings && <p className="text-primary font-weight-bold text-uppercase mb-1 greetings">{greetings}</p>}
+      <h2 className="mb-1">{title}</h2>
+      {helper && <p className="font-weight-normal m-0 helper">{helper}</p>}
     </header>
   );
 };

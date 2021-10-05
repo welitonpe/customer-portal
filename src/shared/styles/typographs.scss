@@ -1,0 +1,13 @@
+@import 'variables';
+
+h2, .h2 {
+    font-size: $h2-size;
+    line-height: 40px;
+    color: $black;
+}
+
+p {
+    font-size: $p-size;
+    line-height: 24px !important;
+    color: $neutral2;
+}

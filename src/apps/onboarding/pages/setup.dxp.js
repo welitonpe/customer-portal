@@ -54,7 +54,7 @@ const SetupDXP = () => {
       }}
       headerProps={{
         title: "Set up DXP Cloud",
-        subtitle:
+        helper:
           "We’ll need a few details to finish building your DXP environment(s).",
       }}
     >

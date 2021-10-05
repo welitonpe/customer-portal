@@ -1,9 +1,10 @@
 @import "@clayui/css/lib/css/atlas";
 
-@import 'variables';
-@import '../components/buttons/buttons';
-@import './components/radios/radios';
-@import '../components/buttons/_badge';
+@import 'typographs';
+
+// Components
+@import 'buttons';
+@import 'radios';
 
 * {
     font-family: "Source Sans Pro";

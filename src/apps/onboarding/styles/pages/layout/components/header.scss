@@ -1,12 +1,15 @@
-h1,
-.h1 {
-  font-size: 2rem;
-  line-height: 40px;
-}
+@import '../../../../../../shared/styles/variables';
 
-h5,
-.h5 {
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  line-height: 20px;
+header {
+  .greetings {
+    font-size: $greetings-size;
+    line-height: 20px;
+    letter-spacing: 0.05em;
+  }
+  
+  .helper {
+    font-size: $helper-size;
+    line-height: 16px;
+    color: $neutral3;
+  }
 }
