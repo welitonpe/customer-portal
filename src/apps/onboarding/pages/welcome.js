@@ -21,21 +21,21 @@ const Welcome = () => {
         ),
       }}
       headerProps={{
-        intro: "Hello Sarah,",
+        greetings: "Hello Sarah,",
         title: "Welcome to Liferay’s Customer Portal",
       }}
     >
       <div className="align-items-center d-flex flex-column justify-content-center px-4">
         <img
           alt="Costumer Service Intro"
-          className="mt-4 mb-4"
+          className="mt-4 mb-4 pb-1"
           draggable={false}
           height={300}
           src={Intro}
-          width={392}
+          width={391.58}
         />
 
-        <p className="text-dark text-center px-2 mx-5">
+        <p className="text-center px-2 mx-5 mb-0">
           Let’s download your DXP activation keys, add any team members to your
           projects and give you a quick tour of the space.
         </p>
