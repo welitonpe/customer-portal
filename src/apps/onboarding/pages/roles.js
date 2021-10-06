@@ -42,8 +42,9 @@ const Roles = () => {
         greetings: "Hello Sarah,",
         title: "What’s your role on this project?",
       }}
+      centered
     >
-      <div className="align-items-center d-flex align-items-center px-4">
+      <div className="d-flex px-4">
         <SquareRadioGroup
           items={getRolesList()}
           name="role"

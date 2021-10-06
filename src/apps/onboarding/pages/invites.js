@@ -15,16 +15,14 @@ const HorizontalInputs = ({ id }) => {
     <ClayInput.Group>
       <ClayInput.GroupItem>
         <Input
-          className="bg-white rounded-lg border border-1"
           name={`invites[${id}].email`}
-          placeholder="username@email.com"
+          placeholder="username@superbank.com"
           type="email"
           label="Email"
         />
       </ClayInput.GroupItem>
       <ClayInput.GroupItem>
         <Select
-          className="bg-white rounded-lg border border-1"
           name={`invites[${id}].roleId`}
           label="Role"
           options={getRolesList()}
@@ -36,7 +34,7 @@ const HorizontalInputs = ({ id }) => {
 
 const Invites = () => {
   const [, dispatch] = useContext(AppContext);
-  const { values, setFieldValue, errors, getFieldMeta } = useFormikContext();
+  const { values, setFieldValue, errors, getFieldMeta } = useFormikContext(); 
 
   return (
     <Layout
@@ -62,7 +60,7 @@ const Invites = () => {
           "Team members will receive an email invitation to access this project on Customer Portal.",
       }}
     >
-      <div className="invites-form px-4 pb-3">
+      <div className={`invites-form overflow-auto${values.invites.length > 3 ? " pr-overflow" : ""}`}>
         <ClayForm.Group className="m-0">
           {values.invites.map((invite, index) => (
             <HorizontalInputs id={index} key={index} />
@@ -72,7 +70,7 @@ const Invites = () => {
           disabled={values.invites.length > 5}
           onClick={() => setFieldValue("invites", [...values.invites, getInitialInvite()])}
           preffixIcon="plus"
-          styles="text-primary py-2 mt-3"
+          styles="text-primary py-2 mt-3 add-button"
         >
           Add More Members
         </BaseButton>

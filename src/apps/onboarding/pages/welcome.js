@@ -24,8 +24,9 @@ const Welcome = () => {
         greetings: "Hello Sarah,",
         title: "Welcome to Liferay’s Customer Portal",
       }}
+      centered
     >
-      <div className="align-items-center d-flex flex-column justify-content-center px-4">
+      <div className="align-items-center d-flex flex-column px-4">
         <img
           alt="Costumer Service Intro"
           className="mb-4 pb-1"
