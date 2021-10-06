@@ -13,7 +13,7 @@ const maxLength = (value, max) => {
 };
 
 const email = (value) => {
-    if (!EMAIL_REGEX.test(value)) {
+    if (value.length > 0 && !EMAIL_REGEX.test(value)) {
         return "Please insert a valid email.";
     }
 }
@@ -21,7 +21,7 @@ const email = (value) => {
 const isValidField = (key, errors) => {
     if (errors[key] && Object.keys(errors[key]).length) {
         return Object.keys(errors[key]).map((k) => {
-            if (typeof errors[key][k] !== "string") {
+            if (typeof errors[key][k] === "object") {
                 return isValidField(k, errors[key]);
             } else {
                 return false;
@@ -32,11 +32,17 @@ const isValidField = (key, errors) => {
     return true;
 }
 
-const isDirtyField = (meta) => {
-    if (Object.keys(meta.initialValue).length) {
-        return Object.keys(meta.initialValue).map((key) => meta.initialValue[key] === meta.value[key]).some((sameInitial) => !sameInitial);
+const isDirtyField = (initialValue, value) => {
+    if (Object.keys(initialValue).length) {
+        return Object.keys(initialValue).map((key) => {
+            if (typeof initialValue[key] === "object") {
+                return isDirtyField(initialValue[key], value[key]);
+            } else {
+                return initialValue[key] === value[key];
+            }
+        }).some((sameInitial) => !sameInitial);
     } else {
-        return meta.initialValue !== meta.value;
+        return initialValue !== value;
     }
 };
 

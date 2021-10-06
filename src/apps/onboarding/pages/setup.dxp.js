@@ -33,6 +33,9 @@ const SetupDXP = () => {
   const [state] = useContext(AppContext);
   const { values, setFieldValue, errors, getFieldMeta } = useFormikContext();
 
+  const metaAdmins = getFieldMeta("admins");
+  const metaDxp = getFieldMeta("dxp");
+
   return (
     <Layout
       footerProps={{
@@ -46,7 +49,7 @@ const SetupDXP = () => {
         middleButton: (
           <PrimaryButton
             onClick={() => console.log("Send it!")}
-            disabled={!(isValidField("admins", errors) && isDirtyField(getFieldMeta("admins")) && isValidField("dxp", errors) && isDirtyField(getFieldMeta("dxp")))}
+            disabled={!(isValidField("admins", errors) && isDirtyField(metaAdmins.initialValue, metaAdmins.value) && isValidField("dxp", errors) && isDirtyField(metaDxp.initialValue, metaDxp.value))}
           >
             Submit
           </PrimaryButton>

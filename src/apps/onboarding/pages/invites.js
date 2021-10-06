@@ -34,7 +34,9 @@ const HorizontalInputs = ({ id }) => {
 
 const Invites = () => {
   const [, dispatch] = useContext(AppContext);
-  const { values, setFieldValue, errors, getFieldMeta } = useFormikContext(); 
+  const { values, setFieldValue, errors, getFieldMeta } = useFormikContext();
+
+  const meta = getFieldMeta("invites");
 
   return (
     <Layout
@@ -48,7 +50,7 @@ const Invites = () => {
         middleButton: (
           <PrimaryButton
             onClick={() => dispatch(changeStep(steps.dxp))}
-            disabled={!(isValidField("invites", errors) && isDirtyField(getFieldMeta("invites")))}
+            disabled={!(isValidField("invites", errors) && isDirtyField(meta.initialValue, meta.value))}
           >
             Send Invitations
           </PrimaryButton>
