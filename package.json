@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@clayui/card": "^3.36.0",
     "@clayui/core": "^3.36.0",
     "@clayui/css": "^3.36.0",
     "@clayui/form": "^3.36.0",
+    "@clayui/label": "^3.32.0",
     "@clayui/layout": "^3.32.0",
     "@craco/craco": "^6.3.0",
     "babel-plugin-root-import": "^6.6.0",
