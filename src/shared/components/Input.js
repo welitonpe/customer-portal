@@ -4,17 +4,27 @@ import { useField } from "formik";
 const Input = ({ label, helper, ...props }) => {
     const [field, meta] = useField(props);
 
+    const getContent = () => {
+        if (meta.touched && meta.error) {
+            return (
+                <div className="error">{meta.error}</div>
+            );
+        } else if (helper) {
+            return (
+                <div className="text-content ml-3 mt-1">
+                    {helper}
+                </div>
+            );
+        }
+    };
+
     return (
         <>
-            <label>
+            <label className="input mb-0">
                 {label}
                 <ClayInput {...field} {...props} />
             </label>
-            {meta.touched && meta.error ? (
-                <div className="error">{meta.error}</div>
-            ) : (<div className="text-content ml-3 mt-1">
-                {helper}
-            </div>)}
+            { getContent() }
         </>
     );
 };

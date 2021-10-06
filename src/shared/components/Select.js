@@ -6,7 +6,7 @@ const Select = ({ label, options, ...props }) => {
 
     return (
         <>
-            <label>
+            <label className="input">
                 {label}
                 <ClaySelect {...field} {...props}>
                     {options.map((option) => (
