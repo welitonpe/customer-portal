@@ -35,7 +35,6 @@ const HorizontalInputs = ({ id }) => {
 const Invites = () => {
   const [, dispatch] = useContext(AppContext);
   const { values, setFieldValue, errors, getFieldMeta } = useFormikContext();
-
   const meta = getFieldMeta("invites");
 
   return (

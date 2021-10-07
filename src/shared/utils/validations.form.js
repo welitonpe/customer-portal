@@ -38,12 +38,12 @@ const isDirtyField = (initialValue, value) => {
             if (typeof initialValue[key] === "object") {
                 return isDirtyField(initialValue[key], value[key]);
             } else {
-                return initialValue[key] === value[key];
+                return initialValue[key] !== value[key];
             }
-        }).some((sameInitial) => !sameInitial);
-    } else {
-        return initialValue !== value;
-    }
+        }).some((diffInitial) => diffInitial);
+    } 
+    
+    return false;
 };
 
 const validate = (fields, values) => {
