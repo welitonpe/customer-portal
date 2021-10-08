@@ -1,6 +1,10 @@
 .dxp-form {
     position: relative;
     margin-bottom: 2rem;
+
+    & + .dxp-group {
+        margin-bottom: 32px;
+    }
 }
 
 hr {
@@ -14,15 +18,36 @@ hr {
 .content-dxp {
     font-size: 1.25rem;
     font-weight: 600;
+    color: #5A5469;
 }
 
 .dxp {
     margin-bottom: 2rem;
+    padding-right: 17px;
+    padding-left: 32px;
 }
 
 .dxp-version {
     margin-right: 123px;
 }
-.content-dxp-group{
+
+.content-dxp-group {
     position: relative;
+    padding-right: 17px;
+    padding-left: 32px;
+
+    .input-group-item {
+        margin-left: 32px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+}
+
+.dxp-add-admin {
+    width: 180px;
+    padding: 8px 16px !important;
+    line-height: 32px;
+    margin-left: 36px; 
 }

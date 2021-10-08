@@ -4,6 +4,7 @@ label.input {
     font-size: $label-size;
     font-weight: 700;
     line-height: 24px;
+    width: 100%;
 
     .form-control {
         height: 3rem;
@@ -20,5 +21,11 @@ label.input {
             color: $black;
             opacity: 0.4;
         }
+    }
+
+    & + .helper {
+        font-size: 13px;
+        line-height: 16px;
+        color: #5A5469;
     }
 }

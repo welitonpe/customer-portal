@@ -11,7 +11,7 @@ const Input = ({ label, helper, ...props }) => {
             );
         } else if (helper) {
             return (
-                <div className="text-content ml-3 mt-1">
+                <div className="helper ml-3 mt-1">
                     {helper}
                 </div>
             );
