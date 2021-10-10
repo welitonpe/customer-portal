@@ -8,4 +8,4 @@ const getApps = () => {
     ];
 };
 
-export { Onboarding, getApps };
+export { Onboarding, CustomerPortal, getApps };
