@@ -3,88 +3,95 @@ import ClayForm, { ClayInput } from '@clayui/form';
 import { getInitialInvite, getRolesList, steps } from "../utils/constants";
 import { AppContext } from "../context";
 import { changeStep } from "../context/actions";
-import { BaseButton, PrimaryButton } from "../../../shared/components/buttons";
 import Layout from "./layout";
 import { useFormikContext } from "formik";
 import Input from "~/shared/components/Input";
 import Select from "~/shared/components/Select";
-import { isDirtyField, isValidField } from "~/shared/utils/validations.form";
+import BaseButton from "~/shared/components/BaseButton";
 
 const HorizontalInputs = ({ id }) => {
-  return (
-    <ClayInput.Group>
-      <ClayInput.GroupItem>
-        <Input
-          name={`invites[${id}].email`}
-          placeholder="username@superbank.com"
-          type="email"
-          label="Email"
-        />
-      </ClayInput.GroupItem>
-      <ClayInput.GroupItem>
-        <Select
-          name={`invites[${id}].roleId`}
-          label="Role"
-          options={getRolesList()}
-        />
-      </ClayInput.GroupItem>
-    </ClayInput.Group>
-  );
+    return (
+        <ClayInput.Group>
+            <ClayInput.GroupItem className="m-0">
+                <Input
+                    name={`invites[${id}].email`}
+                    placeholder="username@superbank.com"
+                    type="email"
+                    label="Email"
+                    groupStyle="m-0"
+                />
+            </ClayInput.GroupItem>
+            <ClayInput.GroupItem className="m-0">
+                <Select
+                    name={`invites[${id}].roleId`}
+                    label="Role"
+                    options={getRolesList().map((option) => (
+                        {
+                            label: option.name,
+                            value: option.id
+                        }
+                    ))}
+                    groupStyle="m-0"
+                />
+            </ClayInput.GroupItem>
+        </ClayInput.Group>
+    );
 };
 
 const Invites = () => {
-  const [, dispatch] = useContext(AppContext);
-  const { values, setFieldValue, errors, getFieldMeta } = useFormikContext();
-  const meta = getFieldMeta("invites");
+    const [, dispatch] = useContext(AppContext);
+    const { values, setFieldValue } = useFormikContext();
 
-  return (
-    <Layout
-      footerProps={{
-        leftButton: (
-          <BaseButton
-          >
-            Skip for now
-          </BaseButton>
-        ),
-        middleButton: (
-          <PrimaryButton
-            onClick={() => dispatch(changeStep(steps.dxp))}
-            disabled={!(isValidField("invites", errors) && isDirtyField(meta.initialValue, meta.value))}
-          >
-            Send Invitations
-          </PrimaryButton>
-        ),
-      }}
-      headerProps={{
-        title: "Invite Your Team Members",
-        helper:
-          "Team members will receive an email invitation to access this project on Customer Portal.",
-      }}
-    >
-      <div className={`invites-form overflow-auto${values.invites.length > 3 ? " pr-overflow" : ""}`}>
-        <ClayForm.Group className="m-0">
-          {values.invites.map((invite, index) => (
-            <HorizontalInputs id={index} key={index} />
-          ))}
-        </ClayForm.Group>
-        <BaseButton
-          disabled={values.invites.length > 5}
-          onClick={() => setFieldValue("invites", [...values.invites, getInitialInvite()])}
-          preffixIcon="plus"
-          styles="text-primary py-2 mt-3 add-button"
+    return (
+        <Layout
+            footerProps={{
+                leftButton: (
+                    <BaseButton
+                        borderless
+                        onClick={() => console.log("Skipped")}
+                    >
+                        Skip for now
+                    </BaseButton>
+                ),
+                middleButton: (
+                    <BaseButton
+                        displayType="primary"
+                        onClick={() => dispatch(changeStep(steps.dxp))}
+                    >
+                        Send Invitations
+                    </BaseButton>
+                ),
+            }}
+            headerProps={{
+                title: "Invite Your Team Members",
+                helper:
+                    "Team members will receive an email invitation to access this project on Customer Portal.",
+            }}
         >
-          Add More Members
-        </BaseButton>
-      </div>
-      <div className="px-4">
-        <hr className="mt-0" />
-        <div className="text-content">
-          Only 3 members per project (including yourself) have role permissions
-          (Admins & Requestors) to open Support tickets.
-        </div>
-      </div>
-    </Layout>
-  );
+            <div className="invites-form px-3 overflow-auto">
+                <ClayForm.Group className="m-0">
+                    {values.invites.map((invite, index) => (
+                        <HorizontalInputs id={index} key={index} />
+                    ))}
+                </ClayForm.Group>
+                <BaseButton
+                    onClick={() => setFieldValue("invites", [...values.invites, getInitialInvite()])}
+                    icon="plus"
+                    className="mb-3 ml-3 mt-2 text-brand-primary"
+                    small
+                    borderless
+                >
+                    Add More Members
+                </BaseButton>
+            </div>
+            <div className="invites-helper px-3">
+                <hr className="mt-0 mx-3" />
+                <div className="mx-3">
+                    <a className="btn font-weight-bold p-0 text-link-sm" href="https://liferay.com/pt" target="_blank" rel="noreferrer">Learn more about Customer Portal roles</a>
+                </div>
+            </div>
+        </Layout>
+    );
 };
 
 export default Invites;

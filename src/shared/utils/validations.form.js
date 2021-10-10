@@ -1,4 +1,4 @@
-const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const required = (value) => {
     if (!value) {
@@ -13,7 +13,7 @@ const maxLength = (value, max) => {
 };
 
 const email = (value) => {
-    if (value.length > 0 && !EMAIL_REGEX.test(value)) {
+    if (!EMAIL_REGEX.test(value)) {
         return "Please insert a valid email.";
     }
 }
@@ -41,25 +41,25 @@ const isDirtyField = (initialValue, value) => {
                 return initialValue[key] !== value[key];
             }
         }).some((diffInitial) => diffInitial);
-    } 
-    
+    }
+
     return false;
 };
 
-const validate = (fields, values) => {
-    const errors = {};
+const validate = (validations, value) => {
+    let error;
 
-    Object.entries(fields).forEach(([key, validations]) => {
+    if (validations) {
         validations.forEach((validation) => {
-            const error = validation(values[key]);
+            const callback = validation(value);
 
-            if (error) {
-                errors[key] = error;
+            if (callback) {
+                error = callback;
             }
         });
-    });
+    }
 
-    return errors;
+    return error;
 };
 
 export { required, maxLength, email, validate, isValidField, isDirtyField }
