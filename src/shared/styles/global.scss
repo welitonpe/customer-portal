@@ -1,12 +1,14 @@
-@import "@clayui/css/lib/css/atlas";
+@import "base";
 
-@import 'typographs';
+@import "components/button";
+@import "components/input";
 
-// Components
-@import 'buttons';
-@import 'radios';
-@import 'inputs';
-
-* {
-    font-family: "Source Sans Pro";
+:host {
+    --form-input-error-bg: #FEEFEF;
+    --form-input-success-bg: #EEF8EC;
+    --form-input-font-weight: 700;
+    --form-input-label-font-weight: 700;
+    --form-input-placeholder-font-weight: 700;
+    --font-weight-normal: 400;
+    --text-paragraph-lg-line-height: 1.4;
 }
