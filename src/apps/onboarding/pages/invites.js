@@ -76,7 +76,7 @@ const Invites = () => {
                 </ClayForm.Group>
                 <BaseButton
                     onClick={() => setFieldValue("invites", [...values.invites, getInitialInvite()])}
-                    icon="plus"
+                    prependIcon="plus"
                     className="mb-3 ml-3 mt-2 text-brand-primary"
                     small
                     borderless

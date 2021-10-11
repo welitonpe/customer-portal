@@ -96,7 +96,7 @@ const SetupDXP = () => {
             </ClayForm.Group>
             <BaseButton
                 onClick={() => setFieldValue("dxp.admins", [...values.dxp.admins, getInitialDxpAdmin()])}
-                icon="plus"
+                prependIcon="plus"
                 className="ml-3 my-2 text-brand-primary"
                 small
                 borderless
